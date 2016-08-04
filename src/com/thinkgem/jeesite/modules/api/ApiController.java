@@ -14,7 +14,7 @@ import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 
 @Controller
 @RequestMapping("/api")
-public class SelectController {
+public class ApiController {
 	
 	@RequestMapping("/clazz")
 	@ResponseBody

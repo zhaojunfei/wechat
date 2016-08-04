@@ -88,7 +88,7 @@
 		</div>
 
 
-		<div class="weui_cell weui_cell_warn">
+		<div class="weui_cell">
 			<div class="weui_cell_hd">
 				<label class="weui_label">证件号码</label>
 			</div>
