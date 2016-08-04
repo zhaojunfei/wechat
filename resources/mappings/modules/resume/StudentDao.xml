@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.resume.dao.StudentDao">
+    
+	<sql id="resumeColumns">
+		a.id AS "id",
+		a.office_id AS "officeId",
+		a.name AS "name",
+		a.gender AS "gender",
+		a.headimgurl AS "headimgurl",
+		a.birthday AS "birthday",
+		a.work_year AS "workYear",
+		a.card_type AS "cardType",
+		a.idnumber AS "idnumber",
+		a.location AS "location",
+		a.email AS "email",
+		a.salary AS "salary",
+		a.current_situation AS "currentSituation",
+		a.mobile AS "mobile",
+		a.hukou AS "hukou",
+		a.resumekey AS "resumekey",
+		a.stature AS "stature",
+		a.marrige AS "marrige",
+		a.qq_talk AS "qqTalk",
+		a.zip_code AS "zipCode",
+		a.ali_talk AS "aliTalk",
+		a.home_page AS "homePage",
+		a.address AS "address",
+		a.student_group AS "studentGroup",
+		a.status AS "status",
+		a.channel AS "channel",
+		a.open_id AS "openId"
+	</sql>
+	
+	<sql id="resumeJoins">
+	</sql>
+    
+	<select id="get" resultType="Resume">
+		SELECT 
+			<include refid="resumeColumns"/>
+		FROM hr_resume a
+		<include refid="resumeJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Resume">
+		SELECT 
+			<include refid="resumeColumns"/>
+		FROM hr_resume a
+		<include refid="resumeJoins"/>
+		<where>
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+			<if test="officeId != null and officeId != ''">
+				AND a.office_id LIKE concat('%',#{officeId},'%')
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Resume">
+		SELECT 
+			<include refid="resumeColumns"/>
+		FROM hr_resume a
+		<include refid="resumeJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	
+	
+	<update id="delete">
+		DELETE FROM hr_resume
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
