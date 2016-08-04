@@ -15,6 +15,7 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 public class Resume extends DataEntity<Resume> {
 	
 	private static final long serialVersionUID = 1L;
+	private String officeId;		//所属班级
 	private String name;		// 姓名
 	private String gender;		// 性别
 	private String headimgurl;		// 个人头像
@@ -269,6 +270,14 @@ public class Resume extends DataEntity<Resume> {
 
 	public void setOpenId(String openId) {
 		this.openId = openId;
+	}
+
+	public String getOfficeId() {
+		return officeId;
+	}
+
+	public void setOfficeId(String officeId) {
+		this.officeId = officeId;
 	}
 	
 }

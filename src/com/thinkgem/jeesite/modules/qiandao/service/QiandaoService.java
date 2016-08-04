@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
@@ -39,11 +40,14 @@ public class QiandaoService extends CrudService<QiandaoDao, Qiandao> {
 		qiandao.setUser(user);
 		qiandao.setDate(DateUtils.getDate("yyyy-MM-dd"));
 		qiandao = qiandaoDao.getQiandaoByUser(qiandao);
-		String clockIn = qiandao.getClockIn().equals("缺勤")?DateUtils.getDate("HH:mm:ss"):qiandao.getClockIn();
-		String clockOut = DateUtils.getDate("HH:mm:ss");
-		qiandao.setClockIn(clockIn);
-		qiandao.setClockOut(clockOut);
-		this.save(qiandao);
+		if(!StringUtils.isEmpty(qiandao)){
+			String clockIn = qiandao.getClockIn().equals("缺勤")?DateUtils.getDate("HH:mm:ss"):qiandao.getClockIn();
+			String clockOut = DateUtils.getDate("HH:mm:ss");
+			qiandao.setClockIn(clockIn);
+			qiandao.setClockOut(clockOut);
+			this.save(qiandao);
+		}
+		
 	}
 	@Transactional(readOnly = false)
 	public void initRegisterQiandao(User user){

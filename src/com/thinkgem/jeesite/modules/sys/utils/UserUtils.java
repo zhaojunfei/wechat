@@ -211,6 +211,16 @@ public class UserUtils {
 		}
 		return officeList;
 	}
+	
+	/**
+	 * 获取当前用户有权限访问的部门
+	 * @return
+	 */
+	public static List<Office> findByParentIds(String parentId){
+		Office entity = new Office();
+		entity.setParentIds(parentId);
+		return officeDao.findByParentIds(entity);
+	}
 
 	/**
 	 * 获取当前用户有权限访问的部门

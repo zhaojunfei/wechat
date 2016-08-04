@@ -40,6 +40,17 @@
 		<form:hidden path="id"/>
 			<input class="weui_input" type="hidden" name="channel" value="WEB" />
 		<sys:message content="${message}"/>		
+		
+		<div class="control-group">
+			<label class="control-label">班级：</label>
+			<div class="controls">
+				<form:select path="officeId" class="input-xlarge ">
+					<form:option value="" label=""/>
+					<form:options items="${fns:findByParentIds('ff0a982b3e954d61a5de9033402f5cf0')}" itemLabel="name" itemValue="id" htmlEscape="false"/>
+				</form:select>
+			</div>
+		</div>
+		
 		<div class="control-group">
 			<label class="control-label">姓名：</label>
 			<div class="controls">
