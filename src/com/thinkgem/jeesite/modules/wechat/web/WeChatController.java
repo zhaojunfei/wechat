@@ -1,6 +1,9 @@
 package com.thinkgem.jeesite.modules.wechat.web;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -13,10 +16,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.sword.wechat4j.user.UserManager;
 
+import com.google.common.collect.Lists;
 import com.thinkgem.jeesite.modules.resume.entity.Resume;
 import com.thinkgem.jeesite.modules.resume.service.ResumeService;
+import com.thinkgem.jeesite.modules.sys.entity.Office;
 import com.thinkgem.jeesite.modules.sys.entity.User;
 import com.thinkgem.jeesite.modules.sys.service.SystemService;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
@@ -101,7 +107,7 @@ public class WeChatController {
 		
 		return "wechat/register_success";
 	}
-	
+
 	
 	
 }
