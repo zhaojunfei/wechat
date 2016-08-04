@@ -4,6 +4,7 @@
 package com.thinkgem.jeesite.modules.resume.web;
 
 import java.io.File;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +31,7 @@ import com.thinkgem.jeesite.modules.account.service.AccountService;
 import com.thinkgem.jeesite.modules.qiandao.service.QiandaoService;
 import com.thinkgem.jeesite.modules.resume.entity.Resume;
 import com.thinkgem.jeesite.modules.resume.service.ResumeService;
+import com.thinkgem.jeesite.modules.sys.entity.Role;
 import com.thinkgem.jeesite.modules.sys.entity.User;
 import com.thinkgem.jeesite.modules.sys.service.SystemService;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
@@ -68,6 +70,18 @@ public class ResumeController extends BaseController {
 	@RequiresPermissions("resume:resume:view")
 	@RequestMapping(value = {"list", ""})
 	public String list(Resume resume, HttpServletRequest request, HttpServletResponse response, Model model) {
+		List<Role> roles =  UserUtils.getRoleList();
+		for(Role role:roles){
+			if(role.getEnname().indexOf("teacher")>-1&&role.getRoleType().equals("user")){
+				User user = UserUtils.getUser();
+				if(!user.isAdmin()){
+					String officeId = user.getOffice().getId();
+					resume.setOfficeId(officeId);
+				}
+				
+			}
+		}
+		
 		Page<Resume> page = resumeService.findPage(new Page<Resume>(request, response), resume); 
 		model.addAttribute("page", page);
 		return "modules/resume/resumeList";
