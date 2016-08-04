@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.qiandao.dao.QiandaoDao">
+    
+	<sql id="qiandaoColumns">
+		a.id AS "id",
+		a.date AS "date",
+		a.week AS "week",
+		a.clock_in AS "clockIn",
+		a.clock_out AS "clockOut",
+		a.user_id AS "user.id",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="qiandaoJoins">
+	</sql>
+    
+	<select id="get" resultType="Qiandao">
+		SELECT 
+			<include refid="qiandaoColumns"/>
+		FROM hr_qiandao a
+		<include refid="qiandaoJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="getQiandaoByUser" resultType="Qiandao">
+		SELECT 
+			<include refid="qiandaoColumns"/>
+		FROM hr_qiandao a
+		<include refid="qiandaoJoins"/>
+		WHERE a.user_id = #{user.id} and a.date=#{date}
+	</select>
+	
+	
+	<select id="findList" resultType="Qiandao">
+		SELECT 
+			<include refid="qiandaoColumns"/>
+		FROM hr_qiandao a
+		<include refid="qiandaoJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			and date BETWEEN #{beginDate} AND #{endDate}
+			<if test="user != null and user.id != null and user.id != ''">
+			AND user_id = #{user.id}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.date asc
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Qiandao">
+		SELECT 
+			<include refid="qiandaoColumns"/>
+		FROM hr_qiandao a
+		<include refid="qiandaoJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO hr_qiandao(
+			id,
+			date,
+			week,
+			clock_in,
+			clock_out,
+			user_id,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{date},
+			#{week},
+			#{clockIn},
+			#{clockOut},
+			#{user.id},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE hr_qiandao SET 	
+			date = #{date},
+			week = #{week},
+			clock_in = #{clockIn},
+			clock_out = #{clockOut},
+			user_id = #{user.id},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE hr_qiandao SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

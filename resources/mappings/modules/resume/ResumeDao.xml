@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thinkgem.jeesite.modules.resume.dao.ResumeDao">
+    
+	<sql id="resumeColumns">
+		a.id AS "id",
+		a.name AS "name",
+		a.gender AS "gender",
+		a.headimgurl AS "headimgurl",
+		a.birthday AS "birthday",
+		a.work_year AS "workYear",
+		a.card_type AS "cardType",
+		a.idnumber AS "idnumber",
+		a.location AS "location",
+		a.email AS "email",
+		a.salary AS "salary",
+		a.current_situation AS "currentSituation",
+		a.mobile AS "mobile",
+		a.hukou AS "hukou",
+		a.resumekey AS "resumekey",
+		a.stature AS "stature",
+		a.marrige AS "marrige",
+		a.qq_talk AS "qqTalk",
+		a.zip_code AS "zipCode",
+		a.ali_talk AS "aliTalk",
+		a.home_page AS "homePage",
+		a.address AS "address",
+		a.student_group AS "studentGroup",
+		a.status AS "status",
+		a.channel AS "channel",
+		a.open_id AS "openId"
+	</sql>
+	
+	<sql id="resumeJoins">
+	</sql>
+    
+	<select id="get" resultType="Resume">
+		SELECT 
+			<include refid="resumeColumns"/>
+		FROM resume a
+		<include refid="resumeJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="Resume">
+		SELECT 
+			<include refid="resumeColumns"/>
+		FROM resume a
+		<include refid="resumeJoins"/>
+		<where>
+			a.status='0' 
+			<if test="name != null and name != ''">
+				AND a.name LIKE 
+					<if test="dbName == 'oracle'">'%'||#{name}||'%'</if>
+					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
+					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="Resume">
+		SELECT 
+			<include refid="resumeColumns"/>
+		FROM resume a
+		<include refid="resumeJoins"/>
+		<where>
+			
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO resume(
+			id,
+			name,
+			gender,
+			headimgurl,
+			birthday,
+			work_year,
+			card_type,
+			idnumber,
+			location,
+			email,
+			salary,
+			current_situation,
+			mobile,
+			hukou,
+			resumekey,
+			stature,
+			marrige,
+			qq_talk,
+			zip_code,
+			ali_talk,
+			home_page,
+			address,
+			student_group,
+			status,
+			channel,
+			open_id
+		) VALUES (
+			#{id},
+			#{name},
+			#{gender},
+			#{headimgurl},
+			#{birthday},
+			#{workYear},
+			#{cardType},
+			#{idnumber},
+			#{location},
+			#{email},
+			#{salary},
+			#{currentSituation},
+			#{mobile},
+			#{hukou},
+			#{resumekey},
+			#{stature},
+			#{marrige},
+			#{qqTalk},
+			#{zipCode},
+			#{aliTalk},
+			#{homePage},
+			#{address},
+			#{studentGroup},
+			#{status},
+			#{channel},
+			#{openId}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE resume SET 	
+			name = #{name},
+			gender = #{gender},
+			headimgurl = #{headimgurl},
+			birthday = #{birthday},
+			work_year = #{workYear},
+			card_type = #{cardType},
+			idnumber = #{idnumber},
+			location = #{location},
+			email = #{email},
+			salary = #{salary},
+			current_situation = #{currentSituation},
+			mobile = #{mobile},
+			hukou = #{hukou},
+			resumekey = #{resumekey},
+			stature = #{stature},
+			marrige = #{marrige},
+			qq_talk = #{qqTalk},
+			zip_code = #{zipCode},
+			ali_talk = #{aliTalk},
+			home_page = #{homePage},
+			address = #{address},
+			student_group = #{studentGroup},
+			status = #{status},
+			channel= #{channel},
+			open_id= #{openId}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		DELETE FROM resume
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

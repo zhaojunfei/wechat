@@ -1,0 +1,67 @@
+create table resume
+(
+id         	varchar(200) COMMENT '用户的标识，对当前公众号唯一'  NOT NULL,
+name varchar(20)   comment '姓名',
+gender int default 0 comment '性别',
+year_of_birthday char(4) comment '出生日期-年',
+month_of_birthday char(2) comment '出生日期-月',
+day_of_birthday char(2) comment '出生日期-日',
+work_year int       comment '工作年限',
+card_type int       comment '证件类型',
+idnumber varchar(25) comment '证件号',
+location varchar(150) comment '居住地',
+
+email varchar(80) comment 'email',
+salary int comment	'目前年薪',
+currtype int comment '币种',
+current_situation int comment '求职状态',
+mobile varchar(20) comment '手机号码',
+fpnation char(5) comment '公司电话',
+fpcity char(5) comment '公司电话-区号',
+fpnumber char(20) comment '公司电话-总机号码',
+fpextension char(10) comment '公司电话-分机',
+
+hpnation char(5) comment '家庭电话',
+hpcity char(5) comment '家庭电话-区号',
+hpnumber char(20) comment '家庭电话-电话号码',
+hukou varchar(150) comment '户口',
+resumekey char(12) comment '关键字',
+
+nationality varchar(150) comment '国家或地区',
+stature int        comment '身高',
+marrige int        comment '婚姻状况',--：0：未婚；1：已婚；2：保密
+qq_talk varchar(20) comment 'qq号',
+zip_code char(6) comment '邮编',
+ali_talk varchar(100) comment '旺旺id',
+home_page varchar(200) comment '个人主页',
+address varchar(150) comment '地址',
+student_group int comment '工作经验',--0：有；1：无
+	status     	char(1) COMMENT '状态'  NOT NULL DEFAULT '0',
+	PRIMARY KEY(id)
+)
+--签到
+DROP TABLE IF EXISTS `hr_qiandao`;  
+CREATE TABLE `hr_qiandao` (  
+    id         	varchar(200) COMMENT '用户的标识，对当前公众号唯一'  NOT NULL,
+    `date`  	varchar(64) COMMENT '日期'  NOT NULL,
+	`week`  	varchar(64) COMMENT '星期'  NOT NULL,
+    clock_in    varchar(64) COMMENT '上班打卡'  default '缺勤',
+    clock_out    varchar(64) COMMENT '下班打卡'  default '缺勤',
+    user_id  	varchar(64) COMMENT '所属用户'  NOT NULL,
+	create_by  	varchar(64) COMMENT '创建者'  NOT NULL,
+	create_date	datetime COMMENT '创建时间'  NOT NULL,
+	update_by  	varchar(64) COMMENT '更新者'  NOT NULL,
+	update_date	datetime COMMENT '更新时间'  NOT NULL,
+	remarks    	varchar(255) COMMENT '备注信息'  NULL,
+	del_flag   	char(1) COMMENT '删除标记'  NOT NULL DEFAULT '0',
+	PRIMARY KEY(id)
+);
+alter table `sys_user`  
+Add column open_id varchar(20) null AFTER `mobile`;
+    
+alter table `sys_user`  
+Add column account_no varchar(20) null AFTER `open_id`;
+
+
+
+   
