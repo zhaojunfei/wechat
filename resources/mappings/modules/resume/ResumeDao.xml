@@ -4,6 +4,7 @@
     
 	<sql id="resumeColumns">
 		a.id AS "id",
+		a.office_id AS "officeId",
 		a.name AS "name",
 		a.gender AS "gender",
 		a.headimgurl AS "headimgurl",
@@ -37,7 +38,7 @@
 	<select id="get" resultType="Resume">
 		SELECT 
 			<include refid="resumeColumns"/>
-		FROM resume a
+		FROM hr_resume a
 		<include refid="resumeJoins"/>
 		WHERE a.id = #{id}
 	</select>
@@ -45,7 +46,7 @@
 	<select id="findList" resultType="Resume">
 		SELECT 
 			<include refid="resumeColumns"/>
-		FROM resume a
+		FROM hr_resume a
 		<include refid="resumeJoins"/>
 		<where>
 			a.status='0' 
@@ -68,7 +69,7 @@
 	<select id="findAllList" resultType="Resume">
 		SELECT 
 			<include refid="resumeColumns"/>
-		FROM resume a
+		FROM hr_resume a
 		<include refid="resumeJoins"/>
 		<where>
 			
@@ -83,7 +84,7 @@
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO resume(
+		INSERT INTO hr_resume(
 			id,
 			name,
 			gender,
@@ -108,6 +109,7 @@
 			address,
 			student_group,
 			status,
+			office_id,
 			channel,
 			open_id
 		) VALUES (
@@ -135,13 +137,14 @@
 			#{address},
 			#{studentGroup},
 			#{status},
+			#{officeId},
 			#{channel},
 			#{openId}
 		)
 	</insert>
 	
 	<update id="update">
-		UPDATE resume SET 	
+		UPDATE hr_resume SET 	
 			name = #{name},
 			gender = #{gender},
 			headimgurl = #{headimgurl},
@@ -165,13 +168,14 @@
 			address = #{address},
 			student_group = #{studentGroup},
 			status = #{status},
+			office_id= #{officeId},
 			channel= #{channel},
 			open_id= #{openId}
 		WHERE id = #{id}
 	</update>
 	
 	<update id="delete">
-		DELETE FROM resume
+		DELETE FROM hr_resume
 		WHERE id = #{id}
 	</update>
 	
