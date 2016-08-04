@@ -28,7 +28,14 @@
           <input class="weui_input" id="truename" name="truename" type="text" placeholder="请输入真实姓名" />
         </div>
       </div>
-      
+		<div class="weui_cell">
+			<div class="weui_cell_hd">
+				<label class="weui_label">证件号码</label>
+			</div>
+			<div class="weui_cell_bd weui_cell_primary">
+			<input class="weui_input" type="text" id="idnumber" name="idnumber" placeholder="请输入身份证号码">
+			</div>
+		</div>
       <div class="weui_cell">
         <div class="weui_cell_hd"><label class="weui_label">手机号</label></div>
         <div class="weui_cell_bd weui_cell_primary">
@@ -42,18 +49,18 @@
     </div>
 	</form>
 	<script>
-      $("#showTooltips").click(function() {
-        var tel = $('#tel').val();
-        var truename = $("#truename").val();
-       // var code = $('#code').val();
-       if(!truename) $.toptip('请输入真实姓名');
-       else if(!tel || !/1[3|4|5|7|8]\d{9}/.test(tel)) $.toptip('请输入手机号');
-       // else if(!code || !/\d{6}/.test(code)) $.toptip('请输入六位手机验证码');
-        else {
-        	$.toptip('提交成功', 'success');
-        	$("#registerForm").submit();
-        }
-      });
+	
+	 $("#showTooltips").click(function() {
+	        var tel = $('#tel').val();
+	        var name = $("#truename").val();
+	        var idnumber = $("#idnumber").val();
+	        if(!name)$.toptip('请输入真实姓名');
+	        else if(!tel || !/1[3|4|5|7|8]\d{9}/.test(tel)) $.toptip('请输入正确手机号');
+	        else if (!idnumber) $.toptip('请输入证件号码');
+	        else {
+	        	$("#registerForm").submit();
+	        }
+	      });
     </script>
 </body>
 </html>

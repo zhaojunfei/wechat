@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>操作成功</title>
+<title>中软瑞达-签到失败</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
@@ -23,9 +23,15 @@
 <body ontouchstart>
 
 <div class="weui_msg">
-      <div class="weui_icon_area"><i class="weui_icon_success weui_icon_msg"></i></div>
+      <div class="weui_icon_area"><i class="weui_icon_msg weui_icon_warn"></i></div>
       <div class="weui_text_area">
-        <h2 class="weui_msg_title">操作成功</h2>
+        <h2 class="weui_msg_title">非法提交参数</h2>
+      </div>
+      
+      <div class="weui_opr_area">
+        <p class="weui_btn_area">
+           <a href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa378556d31d712fe&redirect_uri=http://zhaojunfei.tunnel.qydev.com/wechat/register&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect" class="weui_btn weui_btn_primary">绑定微信账号</a>
+        </p>
       </div>
     </div>
 </body>

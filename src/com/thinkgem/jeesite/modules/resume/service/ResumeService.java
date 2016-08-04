@@ -28,8 +28,8 @@ public class ResumeService extends CrudService<ResumeDao, Resume> {
 		return super.get(id);
 	}
 	
-	public Resume getResumeByTruenameAndPhone(String name,String mobile) {
-		return resumeDao.getResumeByTruenameAndPhone(name, mobile);
+	public Resume getResumeByIdnumberAndPhoneAndName(String idnumber, String mobile, String name) {
+		return resumeDao.getResumeByIdnumberAndPhoneAndName(idnumber, mobile, name);
 	}
 	
 	public List<Resume> findList(Resume resume) {

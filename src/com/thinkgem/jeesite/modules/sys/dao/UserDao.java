@@ -21,6 +21,9 @@ import com.thinkgem.jeesite.modules.sys.entity.User;
 public interface UserDao extends CrudDao<User> {
 	@Select("select * from sys_user where open_id=#{openId}")
 	public User getUserByOpenId(@Param(value="openId")String openId);
+	
+	@Select("select * from sys_user where no=#{no} and login_name=#{loginname} and name=#{name}  ")
+	public User getUserByIdnumberAndPhoneAndName(@Param(value="no")String no,@Param(value="loginname")String loginname,@Param(value="name")String name);
 	/**
 	 * 根据登录名称查询用户
 	 * @param loginName

@@ -74,6 +74,10 @@ public class UserUtils {
 		return userDao.getUserByOpenId(openId);
 	}
 	
+	public static User getUserByIdnumberAndPhoneAndName(String no, String loginname, String name){
+		return userDao.getUserByIdnumberAndPhoneAndName(no, loginname, name);
+	}
+	
 	/**
 	 * 根据登录名获取用户
 	 * @param loginName

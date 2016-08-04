@@ -18,6 +18,7 @@ import org.sword.wechat4j.user.UserManager;
 import com.thinkgem.jeesite.modules.resume.entity.Resume;
 import com.thinkgem.jeesite.modules.resume.service.ResumeService;
 import com.thinkgem.jeesite.modules.sys.entity.User;
+import com.thinkgem.jeesite.modules.sys.service.SystemService;
 import com.thinkgem.jeesite.modules.sys.utils.UserUtils;
 import com.thinkgem.jeesite.modules.wechat.web.param.UserRegister;
 
@@ -29,6 +30,8 @@ public class WeChatController {
 	private static Logger logger = Logger.getLogger(WeChatController.class);
 	@Autowired
 	private ResumeService resumeService;
+	@Autowired
+	private SystemService systemService;
 	@RequestMapping
 	public void execute(HttpServletRequest request, HttpServletResponse response){
 		Wechat wechat = new Wechat(request);
@@ -70,15 +73,32 @@ public class WeChatController {
 	@RequestMapping("/checkCode")
 	public String checkCode(UserRegister userRegister,HttpServletRequest request, HttpServletResponse response,HttpSession httpSession,Model model){
 		String code = userRegister.getCode();
-		String name = userRegister.getTruename();
-		String mobile = userRegister.getPhone();
+		if(StringUtils.isEmpty(code)){
+			return "wechat/register_error";
+		}
 		UserManager userManager = new UserManager();
 		String openId = userManager.getOpenId(code);
-		Resume resume = resumeService.getResumeByTruenameAndPhone(name, mobile);
-		if(null!=resume){
-			resume.setOpenId(openId);
-			resumeService.save(resume);
+		
+		String name = userRegister.getTruename();
+		String mobile = userRegister.getPhone();
+		String idnumber = userRegister.getIdnumber();
+		User user = UserUtils.getUserByIdnumberAndPhoneAndName(idnumber,mobile,name);
+		if(!StringUtils.isEmpty(user)){
+			if(StringUtils.isEmpty(user)){
+				user.setOpenId(openId);
+				systemService.saveUser(user);
+			}
+		}else{
+			Resume resume = resumeService.getResumeByIdnumberAndPhoneAndName(idnumber,mobile,name);
+			if(StringUtils.isEmpty(resume)){
+				return "redirect:/a/resume/resume/resume";
+			}
+			if(null!=resume){
+				resume.setOpenId(openId);
+				resumeService.save(resume);
+			}
 		}
+		
 		return "wechat/register_success";
 	}
 	

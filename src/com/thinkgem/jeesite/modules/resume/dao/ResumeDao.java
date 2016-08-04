@@ -17,6 +17,6 @@ import com.thinkgem.jeesite.modules.resume.entity.Resume;
  */
 @MyBatisDao
 public interface ResumeDao extends CrudDao<Resume> {
-	@Select("select * from Resume where name=#{name} and mobile=#{mobile}")
-	public Resume getResumeByTruenameAndPhone(@Param(value = "name") String name,@Param(value="mobile") String mobile);
+	@Select("select * from hr_resume where idnumber=#{idnumber} and mobile=#{mobile} and name=#{name}")
+	public Resume getResumeByIdnumberAndPhoneAndName(@Param(value = "idnumber") String idnumber,@Param(value = "mobile") String mobile,@Param(value = "name") String name);
 }
