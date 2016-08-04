@@ -39,7 +39,7 @@ public class ApiController {
 		for(Dict office:dicts){
 			Items items = new Items();
 			items.setTitle(office.getLabel());
-			items.setValue(office.getId());
+			items.setValue(office.getValue());
 			list.add(items);
 		}
 		return list;
@@ -53,7 +53,7 @@ public class ApiController {
 		for(Dict office:dicts){
 			Items items = new Items();
 			items.setTitle(office.getLabel());
-			items.setValue(office.getId());
+			items.setValue(office.getValue());
 			list.add(items);
 		}
 		return list;

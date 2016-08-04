@@ -55,27 +55,10 @@
 			</div>
 			<div class="weui_cell_bd weui_cell_primary">
 				<input class="weui_input" type="text" id="sex_title">
-				<input class="weui_input" type="hidden" id="sex" name="sex">
+				<input class="weui_input" type="hidden" id="sex" name="gender">
 			</div>
 		</div>
-		<div class="weui_cell">
-			<div class="weui_cell_hd">
-				<label class="weui_label">手机号码</label>
-			</div>
-			<div class="weui_cell_bd weui_cell_primary">
-				<input class="weui_input" type="tel" id="tel" name="mobile">
-			</div>
-		</div>
-
 		
-		<div class="weui_cell">
-			<div class="weui_cell_hd">
-				<label class="weui_label">出生日期</label>
-			</div>
-			<div class="weui_cell_bd weui_cell_primary">
-				<input class="weui_input" type="date" id="birthday" name="birthday">
-			</div>
-		</div>
 
 		<div class="weui_cell">
 			<div class="weui_cell_hd">
@@ -96,6 +79,26 @@
 			<input class="weui_input" type="text" id="idnumber" name="idnumber">
 			</div>
 		</div>
+		
+		<div class="weui_cell">
+			<div class="weui_cell_hd">
+				<label class="weui_label">手机号码</label>
+			</div>
+			<div class="weui_cell_bd weui_cell_primary">
+				<input class="weui_input" type="tel" id="tel" name="mobile">
+			</div>
+		</div>
+
+		
+		<div class="weui_cell">
+			<div class="weui_cell_hd">
+				<label class="weui_label">出生日期</label>
+			</div>
+			<div class="weui_cell_bd weui_cell_primary">
+				<input class="weui_input" type="date" id="birthday" name="birthday">
+			</div>
+		</div>
+		
 		<div class="weui_cell weui_vcode weui_cell_warn">
 			<div class="weui_cell_hd">
 				<label class="weui_label">验证码</label>

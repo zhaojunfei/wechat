@@ -12,10 +12,10 @@
 	content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 ">
 
-<link rel="stylesheet" href="../static/weui/css/weui.min.css">
-<link rel="stylesheet" href="../static/weui/css/jquery-weui.css">
-<script src="../static/weui/js/jquery-2.1.4.js"></script>
-<script src="../static/weui/js/jquery-weui.js"></script>
+<link rel="stylesheet" href="/static/weui/css/weui.min.css">
+<link rel="stylesheet" href="/static/weui/css/jquery-weui.css">
+<script src="/static/weui/js/jquery-2.1.4.js"></script>
+<script src="/static/weui/js/jquery-weui.js"></script>
 
 
 </head>
