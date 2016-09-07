@@ -43,7 +43,7 @@ public class WeChatController {
 		Wechat wechat = new Wechat(request);
 		String result = wechat.execute();
 		if(result.indexOf("www.zhaojunfei.com")>0){
-			result = "";
+			//result = "";
 		}
 		logger.info("response result message:" + result);
 		try {
